@@ -25,7 +25,7 @@ static double apply_RMSLE(const Vector& X, const Vector& Y, double (*f)(double))
     Vector Y_estimated = X.unaryExpr(f);
 
     // e_i = log(y_i + 1) − log(ŷ_i + 1)
-    Vector error = (Y + Vector(n).setOnes()).unaryExpr(&log) - (Y_estimated + Vector(n).setOnes()).unaryExpr(&log);
+    Vector error = (Y + Vector(n).setOnes()).unaryExpr((double (*)(double)) &log) - (Y_estimated + Vector(n).setOnes()).unaryExpr((double (*)(double)) &log);
 
     double error_norm = error.norm();
 
