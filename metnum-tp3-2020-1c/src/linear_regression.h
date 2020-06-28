@@ -6,8 +6,11 @@ class LinearRegression {
 public:
     LinearRegression();
 
-    void fit(Matrix X, Matrix y);
+    void fit(Matrix X, Vector y);
 
     Matrix predict(Matrix X);
+
+    Vector predictOne(Vector X);
 private:
+    Vector factors;
 };

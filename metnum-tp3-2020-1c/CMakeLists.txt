@@ -31,7 +31,8 @@ add_subdirectory(pybind11)
 
 pybind11_add_module(metnum
                     src/metnum.cpp
-                    src/linear_regression.cpp)
+                    src/linear_regression.cpp
+                    src/metrics.hpp)
 
 # Por cada módulo que use OpenMP ponerlo como dependencia de esta forma
 #target_link_libraries(metnum LINK_PUBLIC OpenMP::OpenMP_CXX)
