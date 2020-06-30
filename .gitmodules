@@ -1,6 +1,7 @@
 [submodule "metnum-tp3-2020-1c/eigen-git-mirror"]
 	path = metnum-tp3-2020-1c/eigen
 	url = https://github.com/eigenteam/eigen-git-mirror
+
 [submodule "metnum-tp3-2020-1c/pybind11"]
 	path = metnum-tp3-2020-1c/pybind11
 	url = https://github.com/pybind/pybind11

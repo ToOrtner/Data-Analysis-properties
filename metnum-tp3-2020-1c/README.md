@@ -109,6 +109,7 @@ mkdir build
 cd build
 rm -rf *
 cmake -DPYTHON_EXECUTABLE="$(which python)" -DCMAKE_BUILD_TYPE=Release ..
+
 ```
 - Al ejecutar el siguiente comando se compila e instala la librería en el directorio `notebooks`
 ```
