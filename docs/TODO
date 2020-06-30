@@ -1,0 +1,22 @@
+TO DO list:
+
+-RMSE y RMSLE van en python, no en c++ (pagina 4 de tp3.pdf, aclara que es parte de la experimentacion). A confirmar entre nosotros
+
+-Coeficientes: 
+	-tau de Kendall: https://fayrix.com/machine-learning-metrics_es
+	- coeficiente de determinacion (coef de Pearson al cuadrado): https://es.wikipedia.org/wiki/Coeficiente_de_determinaci%C3%B3n
+	-promedio: va a ser bastante choto creo
+	
+-C++
+	-
+
+-Python 
+	-
+	
+-Latex
+	-  
+
+	
+Preguntas para los profes:
+	-Vale np.corcoef? 
+	-RMSE y RMSLE van en python? (qcy, por las dudas preguntemos)
