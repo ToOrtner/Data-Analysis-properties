@@ -11,12 +11,14 @@ TO DO list:
 	-
 
 -Python 
-	-
+	-Hace falta poner avisos al principio de los algoritmos sobre que las longitudes de los arrays?
+	-Hace falta poner avisos al principio de los algoritmos sobre que el vector no tenga ceros (caso RMSLE no existe log de 0) ?
 	
 -Latex
 	-  
 
 	
 Preguntas para los profes:
-	-Vale np.corcoef? 
+	-Vale np.corcoef? (es el coeficiente de correlacion que nos da numpy)
 	-RMSE y RMSLE van en python? (qcy, por las dudas preguntemos)
+	- vale usar coeficiente de correlacion y coeficiente de determinacion? (el de determinacion es el cuadrado del de correlacion)
