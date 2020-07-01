@@ -11,8 +11,9 @@ TO DO list:
 	-
 
 -Python 
-	-Hace falta poner avisos al principio de los algoritmos sobre que las longitudes de los arrays?
+	-Hace falta poner avisos(cortes) al principio de los algoritmos sobre que las longitudes de los arrays?
 	-Hace falta poner avisos al principio de los algoritmos sobre que el vector no tenga ceros (caso RMSLE no existe log de 0) ?
+	_TODO en segXprecio, linea 12
 	
 -Latex
 	-  
