@@ -22,6 +22,6 @@ void LinearRegression::fit(Matrix X, Vector y) {
 
 Matrix LinearRegression::predict(Matrix X) {
     if (factors.size() == 0)
-        throw runtime_error("PELOTUDO, TENES QUE CORRER FIT PRIMERO");
+        throw runtime_error("Primero tenes que correr el fit");
     return X * factors;
 }
