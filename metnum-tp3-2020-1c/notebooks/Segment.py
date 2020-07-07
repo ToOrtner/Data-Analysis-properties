@@ -1,9 +1,8 @@
 import numpy as np
 from sklearn.model_selection import KFold
 
-
 class Segment:
-    def init(self, name, linear_regressor, features):
+    def __init__(self, name, linear_regressor, features):
         self.name = name
         self.linear_regressor = linear_regressor
         self.features = features
