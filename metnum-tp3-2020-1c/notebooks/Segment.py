@@ -6,6 +6,7 @@ class Segment:
         self.name = name
         self.linear_regressor = linear_regressor
         self.features = features
+        self.errors = 0
 
     def fit(self, A, reales):
         self.linear_regressor.fit(A, reales)
