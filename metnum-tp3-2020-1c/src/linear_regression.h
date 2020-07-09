@@ -11,6 +11,8 @@ public:
     Matrix predict(Matrix X);
 
     Vector predictOne(Vector X);
+
+    Vector getFactors();
 private:
     Vector factors;
 };

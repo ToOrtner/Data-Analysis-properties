@@ -25,3 +25,7 @@ Matrix LinearRegression::predict(Matrix X) {
         throw runtime_error("Primero tenes que correr el fit");
     return X * factors;
 }
+
+Vector LinearRegression::getFactors() {
+    return factors;
+}
