@@ -54,15 +54,17 @@ class Model:
         reales = df_segment[self.predict_column].values
 
         # Si NO hay por lo menos k elementos para hacer kfold, este segmento no va a aportar información relevante para el modelo
-        if len(reales) >= self.kfold:
-            # Creo el segmento
-            segment = Segment(segment_name, metnum.LinearRegression(), self.features)
-            #print(f'Segemento: {segment_name} elementos \n')
-            # Fit y predict
-            segment.execute(A, reales, self.metrics(), self.kfold)
-            # Guardo el segmento
-            self.segments = np.append(self.segments, segment)
+        if len(reales) < self.kfold:
+            raise RuntimeError(f'{segment_name} tiene menos de {self.kfold} elementos')
             
+        # Creo el segmento
+        segment = Segment(segment_name, metnum.LinearRegression(), self.features)
+        #print(f'Segemento: {segment_name} elementos \n')
+        # Fit y predict
+        segment.execute(A, reales, self.metrics(), self.kfold)
+        # Guardo el segmento
+        self.segments = np.append(self.segments, segment)
+
     def _remove_segment_outliers(self):
         df_features = self.df[self.features]
         # Calc z-score
