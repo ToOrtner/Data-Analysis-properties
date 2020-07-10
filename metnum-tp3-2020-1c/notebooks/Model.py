@@ -1,7 +1,7 @@
 import metnum
 import numpy as np
 from Segment import Segment
-from sklearn.metrics import mean_squared_error as RMSE, mean_squared_log_error as RMSLE
+from sklearn.metrics import mean_squared_error as RMSE, mean_squared_log_error as RMSLE, r2_score as R2_SCORE, max_error as MAX_ERROR
 from scipy import stats
 
 class Model:
@@ -18,7 +18,7 @@ class Model:
             self._remove_segment_outliers()
 
     def metrics(self):
-        return [RMSE]#, RMSLE]
+        return [RMSE, RMSLE, R2_SCORE, MAX_ERROR]
     
     def error_gral(self):
         error = 0
