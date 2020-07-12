@@ -22,15 +22,19 @@ class Model:
     def metrics(self):
         return [RMSE, RMSLE, R2_SCORE, MAX_ERROR]
     
-    def error_gral(self):
-        error = 0
-        if(len(self.segments) == 0):
+    def scores_por_segmento(self):
+        if len(self.segments) == 0:
             raise RuntimeError("Primero deberias ejecutar la regresion")
 
-        for segment in self.segments:
-            error += segment.errors
- 
-        return error/len(self.segments)
+        return [s.scores for s in self.segments]
+
+    def prom_scores(self):
+        scores_por_seg = np.array(self.scores_por_segmento())
+        sum = np.zeros(scores_por_seg.shape[1])
+        for score in scores_por_seg:
+            sum += score
+        sum /= scores_por_seg.shape[0]
+        return sum
 
     def regresionar(self):
         self._regresionar_segmentos(self.df, 0)
@@ -56,13 +60,18 @@ class Model:
 
         # Si NO hay por lo menos k elementos para hacer kfold, este segmento no va a aportar información relevante para el modelo
         if len(reales) < self.kfold:
-            raise RuntimeError(f'{segment_name} tiene menos de {self.kfold} elementos')
+            err = RuntimeError(f'{segment_name} tiene menos de {self.kfold} elementos')
+            print(f'Error calculando metricas en segmento {str(segment_name)}:\n{err}')
+            return
             
         # Creo el segmento
-        segment = Segment(str(segment_name), metnum.LinearRegression(), self.features)
+        segment = Segment(
+            str(segment_name), metnum.LinearRegression(), 
+            self.features, self.metrics(), self.kfold
+        )
         #print(f'Segemento: {segment_name} elementos \n')
         # Fit y predict
-        segment.execute(A, reales, self.metrics(), self.kfold)
+        segment.fit(A, reales)
         # Guardo el segmento
         self.segments = np.append(self.segments, segment)
 
