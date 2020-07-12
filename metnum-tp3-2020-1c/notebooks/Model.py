@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error as RMSE, mean_squared_log_error a
 from scipy import stats
 
 class Model:
-    def __init__(self, df, features, segment_columns, kfold=5, predict_column='precio', remove_outliers=True):
+    def __init__(self, df, features, segment_columns, kfold=5, predict_column='precio', remove_outliers=True, drop_na=True):
         self.features = features
         self.segment_columns = segment_columns
         self.predict_column = predict_column
@@ -13,7 +13,9 @@ class Model:
         self.kfold = kfold
         # Genera una copia para no romper nada fuera del modelo
         self.df = df[self.features + self.segment_columns + [predict_column]].copy()
-        self.df = self.df.dropna()
+        
+        if drop_na:
+            self.df = self.df.dropna()
         if remove_outliers:
             self._remove_segment_outliers()
 
@@ -23,12 +25,11 @@ class Model:
     def error_gral(self):
         error = 0
         if(len(self.segments) == 0):
-            print("Primero deberias ejecutar la regresion")
-            return -1
+            raise RuntimeError("Primero deberias ejecutar la regresion")
 
         for segment in self.segments:
             error += segment.errors
-
+ 
         return error/len(self.segments)
 
     def regresionar(self):
@@ -75,12 +76,13 @@ class Model:
         filtered_entries = (abs_z_scores < 2).all(axis=1)
         
         self.df = self.df[filtered_entries]
-
+        
+        
     def _find_segment(self, row):
         path = ''
         for segment_column in self.segment_columns:
             path = f'{path}/{row[segment_column]}'
-
+ 
         return [s for s in self.segments if s.name == path]
     
     def predict_rows(self, df_rows):
@@ -97,5 +99,5 @@ class Model:
             predict = segment[0].predict([row[self.features].values])
             predictions[i] = predict[0][0]
             i +=1
-
+            
         return predictions
