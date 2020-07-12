@@ -58,7 +58,7 @@ class Model:
             raise RuntimeError(f'{segment_name} tiene menos de {self.kfold} elementos')
             
         # Creo el segmento
-        segment = Segment(segment_name, metnum.LinearRegression(), self.features)
+        segment = Segment(str(segment_name), metnum.LinearRegression(), self.features)
         #print(f'Segemento: {segment_name} elementos \n')
         # Fit y predict
         segment.execute(A, reales, self.metrics(), self.kfold)
@@ -75,3 +75,27 @@ class Model:
         filtered_entries = (abs_z_scores < 2).all(axis=1)
         
         self.df = self.df[filtered_entries]
+
+    def _find_segment(self, row):
+        path = ''
+        for segment_column in self.segment_columns:
+            path = f'{path}/{row[segment_column]}'
+
+        return [s for s in self.segments if s.name == path]
+    
+    def predict_rows(self, df_rows):
+        if len(self.segments) == 0:
+            print("Primero tenes que regresionar")
+            return
+
+        predictions = np.zeros(shape=(len(df_rows),))
+        i = 0
+        for index, row in df_rows.iterrows():
+            segment = self._find_segment(row)
+            if(len(segment) == 0):
+                print(f'No existe segmento para la entrada número {index}')
+            predict = segment[0].predict([row[self.features].values])
+            predictions[i] = predict[0][0]
+            i +=1
+
+        return predictions
