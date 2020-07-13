@@ -56,7 +56,7 @@ class Segment:
         return [m(X, y) for m in self.metrics]
     
     def get_df_scores(self):
-        df = pd.Dataframe()
+        df = pd.DataFrame()
         for score, metric in zip(self.scores, self.metrics):
-            df[metric._name_] = score
+            df[metric.__name__] = [score]
         return df

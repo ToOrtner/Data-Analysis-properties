@@ -9,7 +9,7 @@ class Model:
         self.features = features
         self.segment_columns = segment_columns
         self.predict_column = predict_column
-        self.segments = np.array([])
+        self.segments = {}
         self.kfold = kfold
         # Genera una copia para no romper nada fuera del modelo
         self.df = df[self.features + self.segment_columns + [predict_column]].copy()
@@ -26,7 +26,7 @@ class Model:
         if len(self.segments) == 0:
             raise RuntimeError("Primero deberias ejecutar la regresion")
 
-        return [s.scores for s in self.segments]
+        return [s.scores for s in self.segments.values()]
 
     def prom_scores(self):
         scores_por_seg = np.array(self.scores_por_segmento())
@@ -73,7 +73,7 @@ class Model:
         # Fit y predict
         segment.fit(A, reales)
         # Guardo el segmento
-        self.segments = np.append(self.segments, segment)
+        self.segments[segment_name] = segment
 
     def _remove_segment_outliers(self):
         df_features = self.df[self.features]
@@ -92,7 +92,7 @@ class Model:
         for segment_column in self.segment_columns:
             path = f'{path}/{row[segment_column]}'
  
-        return [s for s in self.segments if s.name == path]
+        return self.segments[path]
     
     def predict_rows(self, df_rows):
         if len(self.segments) == 0:
@@ -103,9 +103,9 @@ class Model:
         i = 0
         for index, row in df_rows.iterrows():
             segment = self._find_segment(row)
-            if(len(segment) == 0):
+            if segment is None:
                 print(f'No existe segmento para la entrada número {index}')
-            predict = segment[0].predict([row[self.features].values])
+            predict = segment.predict([row[self.features].values])
             predictions[i] = predict[0][0]
             i +=1
             
