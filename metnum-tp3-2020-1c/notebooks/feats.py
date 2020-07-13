@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+pd.options.mode.chained_assignment = None
 #esta lista está en orden, asi que su peso es aun mayor segun su posicion
 
 ciudades = np.array(["San Pedro Garza García", "Colima", "Mérida", "San Nicolás de los Garza", "Saltillo", "Mazatlán", "Apodaca", "Chihuahua",
@@ -21,7 +21,7 @@ def newfeats(df):
     #valor que llevará la ciudad según su posición en el ranking
     posicion = 1
     for c in ciudades:
-        df.loc[df['ciudad'] == c, 'mejorciudad'] = 100 / posicion
+        df.loc[df['ciudad'] == c, 'mejorciudad'] = posicion
         posicion += 1
 
 

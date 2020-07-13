@@ -8,7 +8,7 @@ from pprint import pprint
 from Model import Model
 from Segment import Segment
 from NlpModel import NlpModel
-
+import feats
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import mean_squared_error as RMSE, mean_squared_log_error as RMSLE, balanced_accuracy_score as BAS, \
@@ -45,7 +45,11 @@ segments = ['tipodepropiedad', 'usosmultiples', 'banos']
 text_features = ['titulo', 'descripcion']
 features = ['metrostotales', 'metroscubiertos', 'garages']
 
-model1 = Model(train_df, features=features, segment_columns=segments)
+#feats obtenidos por feature engineer
+nuevos_feats = ['calurosa', 'parachicos']
+train_df = feats.newfeats(train_df)
+
+model1 = Model(train_df, features=nuevos_feats, segment_columns=segments)
 
 model1.regresionar()
 
