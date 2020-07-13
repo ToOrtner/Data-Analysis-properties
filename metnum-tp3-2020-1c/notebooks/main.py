@@ -25,6 +25,7 @@ from xgboost import XGBClassifier, XGBRegressor
 
 train_df_original = pd.read_csv('../data/train.csv')
 train_df = train_df_original.copy()
+train_df['urbana'] = (train_df['escuelascercanas'] > 0) & (train_df['centroscomercialescercanos'] > 0 )
 # train_df.info()
 test_df_original = pd.read_csv('../data/test.csv')
 test_df = test_df_original.copy()
@@ -41,31 +42,40 @@ train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Rancho'].index
 
 predict_column = 'precio'
 carititud_column = "carititud"
-segments = ['tipodepropiedad', 'usosmultiples', 'banos']
+#segments = ['tipodepropiedad', 'usosmultiples', 'banos']
+segments = ['urbana', 'provincia']
 text_features = ['titulo', 'descripcion']
 features = ['metrostotales', 'metroscubiertos', 'garages']
 
 #feats obtenidos por feature engineer
-nuevos_feats = ['calurosa', 'parachicos']
-train_df = feats.newfeats(train_df)
+#nuevos_feats = ['calurosa', 'parachicos']
+#train_df = feats.newfeats(train_df)
 
-model1 = Model(train_df, features=nuevos_feats, segment_columns=segments)
+model1 = Model(train_df, features=features, segment_columns=segments)
 
 model1.regresionar()
 
-print("""---------------------------------------
-Scores para modelo sin NLP
----------------------------------------""")
-print(model1.scores_por_segmento())
-print(model1.prom_scores())
+print(model1.segments['/False/Jalisco'].get_df_scores())
 
-nlpModel = NlpModel(train_df, text_features=text_features, features=features, segment_columns=segments)
 
-nlpModel.regresionar()
-
-print("""---------------------------------------
-Scores para modelo con NLP
----------------------------------------""")
-
-print(nlpModel.scores_por_segmento())
-print(nlpModel.prom_scores())
+# print("""---------------------------------------
+# Scores para modelo sin NLP
+# ---------------------------------------""")
+# print(model1.scores_por_segmento())
+# print(model1.prom_scores())
+#
+# nlpModel = NlpModel(train_df, text_features=text_features, features=features, segment_columns=segments)
+#
+# nlpModel.regresionar()
+#
+# print("""---------------------------------------
+# Scores para modelo con NLP
+# ---------------------------------------""")
+# for segment in nlpModel.segments:
+#     print(segment.get_df_scores())
+# #print(nlpModel.scores_por_segmento())
+#
+# print("""---------------------------------------
+# Scores promedio
+# ---------------------------------------""")
+# print(nlpModel.prom_scores())
