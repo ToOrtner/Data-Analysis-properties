@@ -1,9 +1,8 @@
 import metnum
 import numpy as np
 from Segment import Segment
-from sklearn.metrics import mean_squared_error as RMSE, mean_squared_log_error as RMSLE, r2_score as R2_SCORE, max_error as MAX_ERROR
+from metricas import  RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE
 from scipy import stats
-
 
 class Model:
     def __init__(self, df, features, segment_columns, kfold=5, predict_column='precio', remove_outliers=True, drop_na=True):
@@ -21,7 +20,7 @@ class Model:
             self._remove_segment_outliers()
 
     def metrics(self):
-        return [RMSE, RMSLE, R2_SCORE, MAX_ERROR]
+        return [RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE]
     
     def scores_por_segmento(self):
         if len(self.segments) == 0:

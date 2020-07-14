@@ -30,6 +30,7 @@ test_df_original = pd.read_csv('../data/test.csv')
 test_df = test_df_original.copy()
 # test_df.info()
 
+
 # Dropeo las huertas porque solo hay una
 train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Huerta'].index)
 # Dropeo las Lote porque solo hay una
@@ -41,14 +42,9 @@ train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Rancho'].index
 
 predict_column = 'precio'
 carititud_column = "carititud"
-#segments = ['tipodepropiedad', 'usosmultiples', 'banos']
 segments = ['urbana', 'banos']
 text_features = ['titulo', 'descripcion']
 features = ['metrostotales', 'metroscubiertos', 'garages']
-
-#feats obtenidos por feature engineer
-
-#nuevos_feats = ['calurosa', 'parachicos']
 train_df = feats.newfeats(train_df)
 
 def experiments (normal = True, nlp = True, n=-1):
