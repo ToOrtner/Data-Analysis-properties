@@ -28,14 +28,12 @@ def newfeats(df):
     #tropico de cancer = a latitud  23,43
     df = df.dropna(subset=['lat', 'piscina'])
 
-    df['calurosa'] = False
-    df.loc[((df['lat'] < 23.43)) & ((df['piscina'] > 0)) , 'calurosa'] = True
+    df['calurosa'] = (df['lat'] < 23.43) & (df['piscina'] > 0)
 
     #escuelas
     df = df.dropna(subset=['habitaciones', 'escuelascercanas'])
 
-    df['parachicos'] = False
-    df.loc[((df['habitaciones'] > 2)) & ((df['escuelascercanas'] > 0)) , 'parachicos'] = True
+    df['parachicos'] = (df['habitaciones'] > 2) & (df['escuelascercanas'] > 0)
 
     df['urbana'] = (df['escuelascercanas'] > 0) & (df['centroscomercialescercanos'] > 0)
 

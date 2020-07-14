@@ -26,3 +26,20 @@ Preguntas para los profes:
 	
 Ideas: 
 	-https://medium.com/datos-y-ciencia/proyecto-machine-learning-predicci%C3%B3n-de-precios-de-viviendas-en-boston-con-regresi%C3%B3n-e8655e6c3655 // es un proyecto de prediccion de precios de inmuebles en boston, tiene varias cosas piolas.
+	
+	
+resultados modelos:
+	modelo 1: segments = ['urbana', 'banos']
+			text_features = ['titulo', 'descripcion']
+			features = ['metrostotales', 'metroscubiertos', 'garages']
+			muestras: 1000
+			resultados model: [2.29662062e+12 3.01732827e-01 8.81312770e-02 8.68881383e+06]
+			resultados nlp: [2.24593691e+12 3.09381076e-01 2.46780039e-01 6.33302899e+06]
+	
+	modelo 2: segments = ['urbana', 'banos', 'garages']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'metrostotales']
+			muestras = 1000
+			[ 2.52297273e+12  3.46644777e-01 -1.53921524e-01  6.89306886e+06   9.97970862e+05  9.94523882e+05]
+			[2.03256658e+12 3.24971538e-01 1.97870963e-01 4.90539363e+06 7.69872267e+05 1.09967195e+06]
+

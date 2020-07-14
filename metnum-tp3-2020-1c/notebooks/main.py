@@ -42,9 +42,9 @@ train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Rancho'].index
 
 predict_column = 'precio'
 carititud_column = "carititud"
-segments = ['urbana', 'banos']
+segments = ['urbana', 'garages', 'calurosa', 'parachicos']
 text_features = ['titulo', 'descripcion']
-features = ['metrostotales', 'metroscubiertos', 'garages']
+features = ['metroscubiertos', 'mejorciudad']
 train_df = feats.newfeats(train_df)
 
 def experiments (normal = True, nlp = True, n=-1):
