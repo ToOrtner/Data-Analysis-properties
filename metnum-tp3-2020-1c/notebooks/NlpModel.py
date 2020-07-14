@@ -37,7 +37,7 @@ class NlpModel(Model):
         df_copy[self._text_feat_column] = self._join_text_features(df_copy)
         X = df_copy[self._text_feat_column].values
         self._create_nlp_column(df_copy, X)
-        super().predict(df_copy)
+        return super().predict(df_copy)
 
     def fit_nlp(self):
         # Entreno al estimador de nlp
