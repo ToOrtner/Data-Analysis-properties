@@ -17,7 +17,7 @@ ciudades = np.array(["San Pedro Garza García", "Colima", "Mérida", "San Nicol�
 def newfeats(df):
 
     #valor predeterminado para las ciudades que no esten en este ranking
-    df['mejorciudad'] = 1
+    df['mejorciudad'] = 100
     #valor que llevará la ciudad según su posición en el ranking
     posicion = 1
     for c in ciudades:
@@ -36,6 +36,8 @@ def newfeats(df):
 
     df['parachicos'] = False
     df.loc[((df['habitaciones'] > 2)) & ((df['escuelascercanas'] > 0)) , 'parachicos'] = True
+
+    df['urbana'] = (df['escuelascercanas'] > 0) & (df['centroscomercialescercanos'] > 0)
 
     return df
 

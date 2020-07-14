@@ -25,7 +25,6 @@ from xgboost import XGBClassifier, XGBRegressor
 
 train_df_original = pd.read_csv('../data/train.csv')
 train_df = train_df_original.copy()
-train_df['urbana'] = (train_df['escuelascercanas'] > 0) & (train_df['centroscomercialescercanos'] > 0 )
 # train_df.info()
 test_df_original = pd.read_csv('../data/test.csv')
 test_df = test_df_original.copy()
@@ -43,13 +42,14 @@ train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Rancho'].index
 predict_column = 'precio'
 carititud_column = "carititud"
 #segments = ['tipodepropiedad', 'usosmultiples', 'banos']
-segments = ['urbana', 'provincia']
+segments = ['urbana', 'banos']
 text_features = ['titulo', 'descripcion']
 features = ['metrostotales', 'metroscubiertos', 'garages']
 
 #feats obtenidos por feature engineer
+
 #nuevos_feats = ['calurosa', 'parachicos']
-#train_df = feats.newfeats(train_df)
+train_df = feats.newfeats(train_df)
 
 model1 = Model(train_df, features=features, segment_columns=segments)
 
@@ -78,8 +78,8 @@ nlpModel.regresionar()
 print("""---------------------------------------
 Scores para modelo con NLP
 ---------------------------------------""")
-# for segment in nlpModel.segments.values():
-#     print(segment.get_df_scores())
+for segment in nlpModel.segments.values():
+    print(segment.get_df_scores())
 #print(nlpModel.scores_por_segmento())
 
 print("""---------------------------------------
