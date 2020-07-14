@@ -55,27 +55,41 @@ model1 = Model(train_df, features=features, segment_columns=segments)
 
 model1.regresionar()
 
-print(model1.segments['/False/Jalisco'].get_df_scores())
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
+df_to_show = pd.DataFrame()
+to_predict = train_df[features + segments + [predict_column]].dropna()[:1000]
+df_to_show["real"] = to_predict[predict_column]
+df_to_show["predicted"] = model1.predict(to_predict[features + segments])
+
+print(df_to_show)
 
 
-# print("""---------------------------------------
-# Scores para modelo sin NLP
-# ---------------------------------------""")
-# print(model1.scores_por_segmento())
-# print(model1.prom_scores())
-#
-# nlpModel = NlpModel(train_df, text_features=text_features, features=features, segment_columns=segments)
-#
-# nlpModel.regresionar()
-#
-# print("""---------------------------------------
-# Scores para modelo con NLP
-# ---------------------------------------""")
-# for segment in nlpModel.segments:
-#     print(segment.get_df_scores())
-# #print(nlpModel.scores_por_segmento())
-#
-# print("""---------------------------------------
-# Scores promedio
-# ---------------------------------------""")
-# print(nlpModel.prom_scores())
+print("""---------------------------------------
+Scores para modelo sin NLP
+---------------------------------------""")
+print(model1.scores_por_segmento())
+print(model1.prom_scores())
+
+nlpModel = NlpModel(train_df, text_features=text_features, features=features, segment_columns=segments)
+
+nlpModel.regresionar()
+
+print("""---------------------------------------
+Scores para modelo con NLP
+---------------------------------------""")
+for segment in nlpModel.segments.values():
+    print(segment.get_df_scores())
+#print(nlpModel.scores_por_segmento())
+
+print("""---------------------------------------
+Scores promedio
+---------------------------------------""")
+print(nlpModel.prom_scores())
+
+df_to_show = pd.DataFrame()
+to_predict = train_df[features + segments + text_features + [predict_column]].dropna()[:1000]
+df_to_show["real"] = to_predict[predict_column]
+df_to_show["predicted"] = nlpModel.predict(to_predict[features + segments + text_features])
+
+print(df_to_show)

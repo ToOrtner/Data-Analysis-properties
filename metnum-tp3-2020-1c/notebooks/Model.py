@@ -4,15 +4,16 @@ from Segment import Segment
 from sklearn.metrics import mean_squared_error as RMSE, mean_squared_log_error as RMSLE, r2_score as R2_SCORE, max_error as MAX_ERROR
 from scipy import stats
 
+
 class Model:
     def __init__(self, df, features, segment_columns, kfold=5, predict_column='precio', remove_outliers=True, drop_na=True):
-        self.features = features
-        self.segment_columns = segment_columns
+        self.features = features.copy()
+        self.segment_columns = segment_columns.copy()
         self.predict_column = predict_column
         self.segments = {}
         self.kfold = kfold
         # Genera una copia para no romper nada fuera del modelo
-        self.df = df[self.features + self.segment_columns + [predict_column]].copy()
+        self.df = df[self.features + self.segment_columns + [self.predict_column]].copy()
         
         if drop_na:
             self.df = self.df.dropna()
@@ -39,6 +40,28 @@ class Model:
     def regresionar(self):
         self._regresionar_segmentos(self.df, 0)
         return self.segments
+
+    def predict(self, df):
+        if df[self.segment_columns + self.features].isnull().values.any():
+            raise ValueError(
+                f'El dataframe tiene que tener las columnas '
+                f'{self.features + self.segment_columns} libre de NaN\'s'
+            )
+        if len(self.segments) == 0:
+            print("Primero tenes que regresionar")
+            return
+
+        predictions = np.zeros(shape=(len(df),))
+        i = 0
+        for index, row in df.iterrows():
+            segment = self._find_segment(row)
+            if segment is None:
+                print(f'No existe segmento para la entrada número {index}')
+            predict = segment.predict([row[self.features].values])
+            predictions[i] = predict[0]
+            i += 1
+
+        return predictions
 
     def _regresionar_segmentos(self, df, segment_index, segment_name=''):
         # Si no hay mas columnas de segmentos para achicar el df, regresiono con ese df.
@@ -85,28 +108,10 @@ class Model:
         filtered_entries = (abs_z_scores < 2).all(axis=1)
         
         self.df = self.df[filtered_entries]
-        
-        
+
     def _find_segment(self, row):
         path = ''
         for segment_column in self.segment_columns:
             path = f'{path}/{row[segment_column]}'
  
         return self.segments[path]
-    
-    def predict_rows(self, df_rows):
-        if len(self.segments) == 0:
-            print("Primero tenes que regresionar")
-            return
-
-        predictions = np.zeros(shape=(len(df_rows),))
-        i = 0
-        for index, row in df_rows.iterrows():
-            segment = self._find_segment(row)
-            if segment is None:
-                print(f'No existe segmento para la entrada número {index}')
-            predict = segment.predict([row[self.features].values])
-            predictions[i] = predict[0][0]
-            i +=1
-            
-        return predictions
