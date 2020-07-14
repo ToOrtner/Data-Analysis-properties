@@ -78,8 +78,8 @@ nlpModel.regresionar()
 print("""---------------------------------------
 Scores para modelo con NLP
 ---------------------------------------""")
-for segment in nlpModel.segments.values():
-    print(segment.get_df_scores())
+# for segment in nlpModel.segments.values():
+#     print(segment.get_df_scores())
 #print(nlpModel.scores_por_segmento())
 
 print("""---------------------------------------
