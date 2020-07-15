@@ -69,9 +69,19 @@ resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error abs
 			features = ['metroscubiertos', 'mejorciudad']
 			[1.61318136e+12 1.82979052e-01 2.05563920e-01 5.65910907e+06 5.94559425e+05 7.01126871e+05]
 			[2.11548447e+12 3.08931544e-01 3.78514973e-01 5.84975194e+06 7.37391243e+05 1.11810956e+06]
+	
+	
+	modelo 6:segments = ['urbana', 'calurosa', 'parachicos']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'mejorciudad', 'antiguedad']
+			predict_column = 'precio'
+			carititud_column = 'carititud'
+			[1.38845450e+12 1.66326682e-01 1.93673349e-01 4.93885682e+06 5.21765649e+05 6.35498449e+05]			
+			[1.83612272e+12 2.89994879e-01 3.19541083e-01 5.15403812e+06 6.67979780e+05 9.74993402e+05]
+						
 			
 	n completo
-	modelo 6:segments = ['urbana', 'calurosa', 'parachicos']
+	modelo 5C:segments = ['urbana', 'calurosa', 'parachicos']
 			text_features = ['titulo', 'descripcion']
 			features = ['metroscubiertos', 'mejorciudad']
 			[1.61318136e+12 1.82979052e-01 2.05563920e-01 5.65910907e+06 5.94559425e+05 7.01126871e+05]
@@ -79,4 +89,16 @@ resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error abs
 			
 		\\ cometario: el modelo de regresion lineal ya habia convergido con n = 1000, mientras que el de nlp, en algunas
 		\\ metricas llego incluso a superar al de regresion. PD: nlp no converge todavia.	
+		
+	modelo 6C:segments = ['urbana', 'calurosa', 'parachicos']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'mejorciudad', 'antiguedad']
+			predict_column = 'precio'
+			carititud_column = 'carititud'
+			[1.38845450e+12 1.66326682e-01 1.93673349e-01 4.93885682e+06 5.21765649e+05 6.35498449e+05]
+			[1.72035903e+12 2.34573201e-01 2.75716413e-01 4.72300651e+06 5.87308368e+05 8.98697269e+05]
+			
+			
+			
+			
 			
