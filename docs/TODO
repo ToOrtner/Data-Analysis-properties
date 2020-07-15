@@ -28,18 +28,55 @@ Ideas:
 	-https://medium.com/datos-y-ciencia/proyecto-machine-learning-predicci%C3%B3n-de-precios-de-viviendas-en-boston-con-regresi%C3%B3n-e8655e6c3655 // es un proyecto de prediccion de precios de inmuebles en boston, tiene varias cosas piolas.
 	
 	
-resultados modelos:
-	modelo 1: segments = ['urbana', 'banos']
+resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error absoluto)
+	n = 1000 
+	modelo 1:segments = ['urbana', 'banos']
 			text_features = ['titulo', 'descripcion']
 			features = ['metrostotales', 'metroscubiertos', 'garages']
 			muestras: 1000
-			resultados model: [2.29662062e+12 3.01732827e-01 8.81312770e-02 8.68881383e+06]
-			resultados nlp: [2.24593691e+12 3.09381076e-01 2.46780039e-01 6.33302899e+06]
+			[2.29662062e+12 3.01732827e-01 8.81312770e-02 8.68881383e+06,  8.82102217e+05  1.06168494e+06]
+			[2.18269769e+12 3.16953998e-01 2.42297016e-01 6.32195404e+06  7.60984016e+05 1.15083473e+06]
 	
-	modelo 2: segments = ['urbana', 'banos', 'garages']
+	modelo 2:segments = ['urbana', 'banos', 'garages']
 			text_features = ['titulo', 'descripcion']
 			features = ['metroscubiertos', 'metrostotales']
 			muestras = 1000
 			[ 2.52297273e+12  3.46644777e-01 -1.53921524e-01  6.89306886e+06   9.97970862e+05  9.94523882e+05]
 			[2.03256658e+12 3.24971538e-01 1.97870963e-01 4.90539363e+06 7.69872267e+05 1.09967195e+06]
-
+	
+	modelo 3:segments = ['urbana', 'garages']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos']
+			[2.50511128e+12 3.37543216e-01 1.45591934e-01 9.40555420e+06  1.03116338e+06 9.67104357e+05]
+			[1.86373715e+12 3.39480205e-01 4.12398650e-01 7.54357698e+06  7.27359784e+05 1.02940203e+06]
+			
+	modelo 4:segments = ['urbana', 'garages', 'calurosa']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'mejorciudad']
+			[ 2.60535094e+12  2.62088563e-01 -9.49252851e-03  5.19404292e+06   8.05281824e+05  8.30897128e+05]
+			[2.11660213e+12 2.73993789e-01 3.48805226e-01 5.48922363e+06 7.02593173e+05 1.04846510e+06]
+			
+		
+	modelo 4:segments = ['urbana', 'garages', 'calurosa', 'parachicos']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'mejorciudad']
+			[2.10147518e+12  2.60762875e-01 -1.03330752e+01  4.45853094e+06  7.20899251e+05  7.84443885e+05]
+			[2.34497736e+12  3.19578667e-01 -4.49359710e+00  4.85447800e+06  8.37641562e+05  1.13078495e+06]
+			
+			
+	modelo 5:segments = ['urbana', 'calurosa', 'parachicos']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'mejorciudad']
+			[1.61318136e+12 1.82979052e-01 2.05563920e-01 5.65910907e+06 5.94559425e+05 7.01126871e+05]
+			[2.11548447e+12 3.08931544e-01 3.78514973e-01 5.84975194e+06 7.37391243e+05 1.11810956e+06]
+			
+	n completo
+	modelo 6:segments = ['urbana', 'calurosa', 'parachicos']
+			text_features = ['titulo', 'descripcion']
+			features = ['metroscubiertos', 'mejorciudad']
+			[1.61318136e+12 1.82979052e-01 2.05563920e-01 5.65910907e+06 5.94559425e+05 7.01126871e+05]
+			[1.63361636e+12 2.18245864e-01 3.02213521e-01 4.58345179e+06 5.54826285e+05 8.61807666e+05]
+			
+		\\ cometario: el modelo de regresion lineal ya habia convergido con n = 1000, mientras que el de nlp, en algunas
+		\\ metricas llego incluso a superar al de regresion. PD: nlp no converge todavia.	
+			
