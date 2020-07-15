@@ -30,15 +30,17 @@ test_df_original = pd.read_csv('../data/test.csv')
 test_df = test_df_original.copy()
 # test_df.info()
 
+def drops(df):
+    # Dropeo las huertas porque solo hay una
+    df = df.drop(df[df['tipodepropiedad'] == 'Huerta'].index)
+    # Dropeo las Lote porque solo hay una
+    df = df.drop(df[df['tipodepropiedad'] == 'Lote'].index)
+    # Dropeo las quintas vacacionales porque solo los precios son cualquiera
+    df = df.drop(df[df['tipodepropiedad'] == 'Quinta Vacacional'].index)
+    # Dropeo los ranchos porque solo los precios son cualquiera
+    df = df.drop(df[df['tipodepropiedad'] == 'Rancho'].index)
 
-# Dropeo las huertas porque solo hay una
-train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Huerta'].index)
-# Dropeo las Lote porque solo hay una
-train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Lote'].index)
-# Dropeo las quintas vacacionales porque solo los precios son cualquiera
-train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Quinta Vacacional'].index)
-# Dropeo los ranchos porque solo los precios son cualquiera
-train_df = train_df.drop(train_df[train_df['tipodepropiedad'] == 'Rancho'].index)
+
 # feature engineer
 train_df = feats.newfeats(train_df)
 
@@ -49,65 +51,11 @@ segments = ['urbana', 'calurosa', 'parachicos']
 text_features = ['titulo', 'descripcion']
 features = ['metroscubiertos', 'mejorciudad']
 
-def experiments(segments, text_features, features, predict_column='precio', carititud_column='carititud',
-                normal=True, nlp=True, n=-1):
-    if normal:
-        model1 = Model(train_df, features=features, segment_columns=segments)
-
-        model1.regresionar()
-
-        pd.set_option('display.float_format', lambda x: '%.3f' % x)
-
-        df_to_show = pd.DataFrame()
-
-        if n < 0:
-            to_predict = train_df[features + segments + text_features + [predict_column]].dropna()
-        else:
-            to_predict = train_df[features + segments + text_features + [predict_column]].dropna()[:n]
-        df_to_show["real"] = to_predict[predict_column]
-        df_to_show["predicted"] = model1.predict(to_predict[features + segments])
-
-        print(df_to_show)
-
-        print("""---------------------------------------
-        Scores para modelo sin NLP
-        ---------------------------------------""")
-        print(model1.scores_por_segmento())
-        print(model1.prom_scores())
-
-    if nlp:
-        nlpModel = NlpModel(train_df, text_features=text_features, features=features, segment_columns=segments)
-
-        nlpModel.regresionar()
-
-        print("""---------------------------------------
-        Scores para modelo con NLP
-        ---------------------------------------""")
-        for segment in nlpModel.segments.values():
-            print(segment.get_df_scores())
-        # print(nlpModel.scores_por_segmento())
-
-        print("""---------------------------------------
-        Scores promedio
-        ---------------------------------------""")
-        print(nlpModel.prom_scores())
-
-        df_to_show = pd.DataFrame()
-
-        if n < 0:
-            to_predict = train_df[features + segments + text_features + [predict_column]].dropna()
-        else:
-            to_predict = train_df[features + segments + text_features + [predict_column]].dropna()[:n]
-
-        df_to_show["real"] = to_predict[predict_column]
-        df_to_show["predicted"] = nlpModel.predict(to_predict[features + segments + text_features])
-
-        print(df_to_show)
-
-
 
 def correr(df, segments, text_features, features, predict_column='precio', normal=True, nlp=True):
-    reales = df[predict_column]
+    to_predict = df.dropna(subset=features + segments + text_features + [predict_column])
+
+    reales = to_predict[predict_column]
     predictedM = np.array([])
     predictedNLP = np.array([])
     if normal:
@@ -119,9 +67,10 @@ def correr(df, segments, text_features, features, predict_column='precio', norma
 
         df_to_show = pd.DataFrame()
 
-        to_predict = df[features + segments + text_features + [predict_column]].dropna()
         df_to_show["real"] = reales
+        print("reales  ", reales.shape)
         predictedM = model1.predict(to_predict[features + segments])
+        print("predicc", predictedM.shape)
         df_to_show["predicted"] = predictedM
 
         print(df_to_show)
@@ -151,8 +100,6 @@ def correr(df, segments, text_features, features, predict_column='precio', norma
 
         df_to_show = pd.DataFrame()
 
-        to_predict = df[features + segments + text_features + [predict_column]].dropna()
-
         df_to_show["real"] = reales
         predictedNLP = nlpModel.predict(to_predict[features + segments + text_features])
         df_to_show["predicted"] = predictedNLP
@@ -161,7 +108,4 @@ def correr(df, segments, text_features, features, predict_column='precio', norma
 
     return reales, predictedM, predictedNLP
 
-
-
-#por si quieren correrlo desde aca, pero la idea es correrlo en exps.ipynb
-#experiments(segments, text_features, features, n=1000)
+predic = correr(train_df, segments, text_features, features)
