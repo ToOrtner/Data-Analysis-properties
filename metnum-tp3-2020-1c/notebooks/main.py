@@ -108,4 +108,4 @@ def correr(df, segments, text_features, features, predict_column='precio', norma
 
     return reales, predictedM, predictedNLP
 
-predic = correr(train_df, segments, text_features, features)
+#predic = correr(train_df, segments, text_features, features)
