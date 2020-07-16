@@ -23,13 +23,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier, XGBRegressor
 
-train_df_original = pd.read_csv('../data/train.csv')
-train_df = train_df_original.copy()
-# train_df.info()
-test_df_original = pd.read_csv('../data/test.csv')
-test_df = test_df_original.copy()
-# test_df.info()
-
 def drops(df):
     # Dropeo las huertas porque solo hay una
     df = df.drop(df[df['tipodepropiedad'] == 'Huerta'].index)
@@ -39,18 +32,6 @@ def drops(df):
     df = df.drop(df[df['tipodepropiedad'] == 'Quinta Vacacional'].index)
     # Dropeo los ranchos porque solo los precios son cualquiera
     df = df.drop(df[df['tipodepropiedad'] == 'Rancho'].index)
-
-
-# feature engineer
-train_df = feats.newfeats(train_df)
-
-
-predict_column = 'precio'
-carititud_column = "carititud"
-segments = ['urbana', 'calurosa', 'parachicos']
-text_features = ['titulo', 'descripcion']
-features = ['metroscubiertos', 'mejorciudad']
-
 
 def correr(df, segments, text_features, features, predict_column='precio', normal=True, nlp=True):
     to_predict = df.dropna(subset=features + segments + text_features + [predict_column])

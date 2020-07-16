@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 pd.options.mode.chained_assignment = None
-#esta lista está en orden, asi que su peso es aun mayor segun su posicion
-
 ciudades = np.array(["San Pedro Garza García", "Colima", "Mérida", "San Nicolás de los Garza", "Saltillo", "Mazatlán", "Apodaca", "Chihuahua",
                      "Aguascalientes", "Mexicali", "Querétaro", "Campeche", "Guadalupe", "Matamoros", "Nuevo Laredo", "Venustiano Carranza", "Torreón",
                      "León", "Culiacán", "Hermosillo", "Monterrey", "Reynosa", "Benito Juárez", "Zapopan", "Zacatecas", "La Paz", "Manzanillo",
