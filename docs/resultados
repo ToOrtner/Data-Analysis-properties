@@ -1,5 +1,5 @@
 	
-resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error absoluto)
+resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error absoluto), porcentaje prom
 	n = 1000 
 	modelo 1:segments = ['urbana', 'banos']
 			text_features = ['titulo', 'descripcion']
@@ -102,6 +102,15 @@ resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error abs
 				[2.38760603e+12 3.40471124e-01 3.51453045e-01 1.04635726e+07 1.02185537e+06 1.01526205e+06]
 				[1.79168091e+12 3.56420056e-01 4.77866557e-01 8.18894732e+06 7.21423278e+05 1.00845811e+06]
 				\\ imagen 2
+	
+	
+	Modelo V:segments = ['urbana', 'banos']
+			features = ['metroscubiertos', 'mejorciudad']
+			predict_column = 'precio'
+			text_features = ['titulo', 'descripcion']
+			carititud_column = 'carititud'			
+			2.525223e+12 	0.217584 	-0.003413 	6.412750e+06 	760722.464683 	841451.163225 	27.028149
+			2.276707e+12 	0.24784 	0.337941 	7.167201e+06 	690149.090423 	1.101030e+06 	52.556292
 
 				
 			
