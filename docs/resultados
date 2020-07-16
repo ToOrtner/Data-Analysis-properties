@@ -92,6 +92,7 @@ resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error abs
 				carititud_column = 'carititud'
 				[2.43397022e+12 3.33718100e-01 3.39037292e-01 1.05635130e+07 1.04133337e+06 9.99044176e+05]
 				[5.79594530e+11 1.10971059e-01 1.64194328e-01 2.73023427e+06 2.35189239e+05 3.25243854e+05]
+				\\ imagen 1
 				
 	Modelo IV:  segments = ['urbana']
 				text_features = ['titulo', 'descripcion']
@@ -100,7 +101,7 @@ resultados modelos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error abs
 				carititud_column = 'carititud'
 				[2.38760603e+12 3.40471124e-01 3.51453045e-01 1.04635726e+07 1.02185537e+06 1.01526205e+06]
 				[1.79168091e+12 3.56420056e-01 4.77866557e-01 8.18894732e+06 7.21423278e+05 1.00845811e+06]
-
+				\\ imagen 2
 
 				
 			

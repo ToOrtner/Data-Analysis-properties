@@ -6,3 +6,6 @@ def NRMSE(original, predicho):
     prom = np.mean(original)
     return RMSE(original, predicho) / prom
 
+def porcentajeProm (original, predicho):
+
+    return sum(abs(original - predicho) * 100 / original) / original.size

@@ -1,7 +1,7 @@
 import metnum
 import numpy as np
 from Segment import Segment
-from metricas import  RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE
+from metricas import  RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE, porcentajeProm
 from scipy import stats
 
 class Model:
@@ -20,7 +20,7 @@ class Model:
             self._remove_segment_outliers()
 
     def metrics(self):
-        return [RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE]
+        return [RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE, porcentajeProm]
     
     def scores_por_segmento(self):
         if len(self.segments) == 0:
