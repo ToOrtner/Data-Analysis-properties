@@ -1,0 +1,9 @@
+
+resultados Metros Cubiertos: RMSE, RMSLE, R2_SCORE, MAX_ERROR, NRMSE, MAE(media error absoluto), porcentaje prom
+Modelo 1:segments = ['urbana', 'banos']
+		features = ['mejorciudad']
+		predict_column = 'metroscubiertos'
+		text_features = ['titulo', 'descripcion', 'provincia']
+		7.085488e+11 	0.041325 	0.0501 	1.538227e+06 	162131.900092 	250626.155114 	5.744324
+		9.309793e+12 	8.035431 	-1.230374 	5.281653e+06 	2.246251e+06 	1.704436e+06 	40.933274
+		

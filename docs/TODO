@@ -1,17 +1,16 @@
 TO DO list:
 
--RMSE y RMSLE van en python, no en c++ (pagina 4 de tp3.pdf, aclara que es parte de la experimentacion). A confirmar entre nosotros
 
 -Coeficientes: 
-	-tau de Kendall: https://fayrix.com/machine-learning-metrics_es
-	- coeficiente de determinacion (coef de Pearson al cuadrado): https://es.wikipedia.org/wiki/Coeficiente_de_determinaci%C3%B3n
-	-promedio: va a ser bastante choto creo
+
+
+
 	
 -C++
 	-
 
 -Python 
-	-Hace falta poner avisos(cortes) al principio de los algoritmos sobre que las longitudes de los arrays?
+
 	-Hace falta poner avisos al principio de los algoritmos sobre que el vector no tenga ceros (caso RMSLE no existe log de 0) ?
 	
 	
@@ -20,9 +19,7 @@ TO DO list:
 
 	
 Preguntas para los profes:
-	-Vale np.corcoef? (es el coeficiente de correlacion que nos da numpy)
-	-RMSE y RMSLE van en python? (qcy, por las dudas preguntemos)
-	- vale usar coeficiente de correlacion y coeficiente de determinacion? (el de determinacion es el cuadrado del de correlacion)
+
 	
 Ideas: 
 	-https://medium.com/datos-y-ciencia/proyecto-machine-learning-predicci%C3%B3n-de-precios-de-viviendas-en-boston-con-regresi%C3%B3n-e8655e6c3655 // es un proyecto de prediccion de precios de inmuebles en boston, tiene varias cosas piolas.
