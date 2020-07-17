@@ -6,4 +6,29 @@ Modelo 1:segments = ['urbana', 'banos']
 		text_features = ['titulo', 'descripcion', 'provincia']
 		7.085488e+11 	0.041325 	0.0501 	1.538227e+06 	162131.900092 	250626.155114 	5.744324
 		9.309793e+12 	8.035431 	-1.230374 	5.281653e+06 	2.246251e+06 	1.704436e+06 	40.933274
+	
+	
+Modelo 2:segments = ['banos']
+		features = ['metrostotales']
+		predict_column = 'metroscubiertos'
+		text_features = ['titulo', 'descripcion']
+		3.674612e+12 	0.527689 	-0.247988 	1.057396e+07 	1.314395e+06 	1.203506e+06 	42.41547
+		1.318859e+12 	0.140829 	0.257756 	6.433302e+06 	395889.35854 	635318.765424 	30.145599		
+		
+Modelo 3:segments = ['banos']
+		features = ['metrostotales', 'antiguedad']
+		predict_column = 'metroscubiertos'
+		text_features = ['titulo', 'descripcion', 'provincia']
+		3.508989e+12 	0.427107 	-0.183816 	1.005143e+07 	1.220891e+06 	1.159695e+06 	40.366773
+		1.267757e+12 	0.136982 	0.381286 	5.197048e+06 	382382.753414 	704961.745695 	31.425469
+		
+Modelo 4: segments = []
+		features = ['metrostotales']
+		predict_column = 'metroscubiertos'
+		text_features = ['titulo', 'descripcion', 'provincia']
+		2.560041e+12 	0.43512 	0.277539 	1.088641e+07 	1.135629e+06 	1.073761e+06 	68.172962
+		3.510063e+11 	0.081798 	0.113541 	1.680677e+06 	147243.216917 	214005.100486 	16.024417
+
+		
+		
 		
