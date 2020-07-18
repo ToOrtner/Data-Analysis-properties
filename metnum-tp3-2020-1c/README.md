@@ -31,8 +31,10 @@ Para ejecutar los tests de python:
 pip install -r requirements.txt
 ```
 
-- Luego,  en el archivo exps.ipynb encontraran todo lo necesario para correr los experimentos
-- En 
+- Luego, en el archivo exps.ipynb encontraran todo lo necesario para correr los experimentos.
+- Model.py y NlpModel.py se encuentran las clases utilizadas para crear cada modelo.
+- En feats.py está la función que realiza feature engineer
+- En Segments.py está la clase que hace regresion para cada segmento.
 
 
 
