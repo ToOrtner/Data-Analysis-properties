@@ -3,6 +3,41 @@
 
 ## Instrucciones
 
+# Como compilar el codigo en c++
+
+- Compilar el código C++ en un módulo de python
+```
+mkdir build
+cd build
+rm -rf *
+cmake -DPYTHON_EXECUTABLE="$(which python)" -DCMAKE_BUILD_TYPE=Release ..
+
+```
+- Al ejecutar el siguiente comando se compila e instala la librería en el directorio `notebooks`
+```
+make install
+```
+
+
+
+# Como correr los análisis
+
+
+Para ejecutar los tests de python:
+
+- Primero fijarse de tener todos los requirements
+
+```
+pip install -r requirements.txt
+```
+
+- Luego,  en el archivo exps.ipynb encontraran todo lo necesario para correr los experimentos
+- En 
+
+
+
+
+
 
 1. Crear un repo git en donde se bajen esto
 

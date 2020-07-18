@@ -24,70 +24,13 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier, XGBRegressor
 
+# Dropeamos los tipos de propiedades que generen problemas con la experimentación
 def drops(df):
-    # Dropeo las huertas porque solo hay una
+    # Dropeamos las huertas porque solo hay una
     df = df.drop(df[df['tipodepropiedad'] == 'Huerta'].index)
-    # Dropeo las Lote porque solo hay una
+    # Dropeamos las Lote porque solo hay una
     df = df.drop(df[df['tipodepropiedad'] == 'Lote'].index)
-    # Dropeo las quintas vacacionales porque solo los precios son cualquiera
+    # Dropeamos las quintas vacacionales porque solo los precios son cualquiera
     df = df.drop(df[df['tipodepropiedad'] == 'Quinta Vacacional'].index)
-    # Dropeo los ranchos porque solo los precios son cualquiera
+    # Dropeamos los ranchos porque solo los precios son cualquiera
     df = df.drop(df[df['tipodepropiedad'] == 'Rancho'].index)
-
-def correr(df, segments, text_features, features, predict_column='precio', normal=True, nlp=True):
-    to_predict = df.dropna(subset=features + segments + text_features + [predict_column])
-
-    reales = to_predict[predict_column]
-    predictedM = np.array([])
-    predictedNLP = np.array([])
-    if normal:
-        model1 = Model(df, features=features, segment_columns=segments)
-
-        model1.regresionar()
-
-        pd.set_option('display.float_format', lambda x: '%.3f' % x)
-
-        df_to_show = pd.DataFrame()
-
-        df_to_show["real"] = reales
-        print("reales  ", reales.shape)
-        predictedM = model1.predict(to_predict[features + segments])
-        print("predicc", predictedM.shape)
-        df_to_show["predicted"] = predictedM
-
-        print(df_to_show)
-
-        print("""---------------------------------------
-        Scores para modelo sin NLP
-        ---------------------------------------""")
-        print(model1.scores_por_segmento())
-        print(model1.prom_scores())
-
-    if nlp:
-        nlpModel = NlpModel(df, text_features=text_features, features=features, segment_columns=segments)
-
-        nlpModel.regresionar()
-
-        print("""---------------------------------------
-        Scores para modelo con NLP
-        ---------------------------------------""")
-        for segment in nlpModel.segments.values():
-            print(segment.get_df_scores())
-        # print(nlpModel.scores_por_segmento())
-
-        print("""---------------------------------------
-        Scores promedio
-        ---------------------------------------""")
-        print(nlpModel.prom_scores())
-
-        df_to_show = pd.DataFrame()
-
-        df_to_show["real"] = reales
-        predictedNLP = nlpModel.predict(to_predict[features + segments + text_features])
-        df_to_show["predicted"] = predictedNLP
-
-        print(df_to_show)
-
-    return reales, predictedM, predictedNLP
-
-#predic = correr(train_df, segments, text_features, features)

@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 pd.options.mode.chained_assignment = None
+
+#Ranking de mejores ciudades de Mexico, ordenada de mejor a peor
 ciudades = np.array(["San Pedro Garza García", "Colima", "Mérida", "San Nicolás de los Garza", "Saltillo", "Mazatlán", "Apodaca", "Chihuahua",
                      "Aguascalientes", "Mexicali", "Querétaro", "Campeche", "Guadalupe", "Matamoros", "Nuevo Laredo", "Venustiano Carranza", "Torreón",
                      "León", "Culiacán", "Hermosillo", "Monterrey", "Reynosa", "Benito Juárez", "Zapopan", "Zacatecas", "La Paz", "Manzanillo",
@@ -16,8 +18,11 @@ def newfeats(df):
 
     #valor predeterminado para las ciudades que no esten en este ranking
     df['mejorciudad'] = 100
+    
     #valor que llevará la ciudad según su posición en el ranking
     posicion = 1
+    
+    #Recorro las ciudades del ranking, y segun el orden en que aparezcan, le agregamos su posicion en el ranking
     for c in ciudades:
         df.loc[df['ciudad'] == c, 'mejorciudad'] = posicion
         posicion += 1
