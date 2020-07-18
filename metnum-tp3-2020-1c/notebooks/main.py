@@ -21,6 +21,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier, XGBRegressor
 
 def drops(df):
